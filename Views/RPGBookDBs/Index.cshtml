@@ -1,0 +1,82 @@
+﻿@model IEnumerable<WebApplication1.Models.RPGBookDB>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @using (Html.BeginForm())
+    {
+        <text>Game</text>@Html.DropDownList("fGame", new SelectList(ViewBag.Game), "")
+        <text>Book Type</text>@Html.DropDownList("fBookType", new SelectList(ViewBag.BookType), "")
+        <text>System</text>@Html.DropDownList("fSystem", new SelectList(ViewBag.System), "")
+        <text>Genre</text>@Html.DropDownList("fGenre", new SelectList(ViewBag.Genre), "")
+        <text>Has Played</text>@Html.CheckBox("fHasPlayed", new SelectList(ViewBag.HasPlayed))
+        <input type="submit" value="Search" />
+        <input type="reset" value="Clear" />
+    }
+</p>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Game", "Index", new { sortOrder = ViewBag.GameSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Book Type", "Index", new { sortOrder = ViewBag.TypeSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("System", "Index", new { sortOrder = ViewBag.SystemSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Genre", "Index", new { sortOrder = ViewBag.GenreSortParam })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasPlayed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Game)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BookType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.System)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasPlayed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rating)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
